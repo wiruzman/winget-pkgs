@@ -51,7 +51,7 @@ jobs:
           Check-Installed
           Run-WinGet @('uninstall','--id','MetalBear.mirrord','--exact','--silent','--accept-source-agreements','--disable-interactivity')
           Run-WinGet @('install','--manifest','manifests/m/MetalBear/mirrord/3.246.0','--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
-          Run-WinGet @('install','--manifest',$manifest,'--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
+          Run-WinGet @('upgrade','--manifest',$manifest,'--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
           Check-Installed
           $oldKey = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{61BB51FB-4D55-4738-8DDB-88A0B5AD5F31}'
           if (Test-Path $oldKey) { throw 'Old MSI registration remains after upgrade' }
