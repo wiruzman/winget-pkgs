@@ -49,13 +49,13 @@ jobs:
           Run-WinGet @('validate','--manifest',$manifest)
           Run-WinGet @('install','--manifest',$manifest,'--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
           Check-Installed
-          Run-WinGet @('uninstall','--id','MetalBear.mirrord','--exact','--silent','--disable-interactivity')
+          Run-WinGet @('uninstall','--id','MetalBear.mirrord','--exact','--silent','--accept-source-agreements','--disable-interactivity')
           Run-WinGet @('install','--manifest','manifests/m/MetalBear/mirrord/3.246.0','--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
           Run-WinGet @('install','--manifest',$manifest,'--silent','--accept-package-agreements','--accept-source-agreements','--disable-interactivity')
           Check-Installed
           $oldKey = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{61BB51FB-4D55-4738-8DDB-88A0B5AD5F31}'
           if (Test-Path $oldKey) { throw 'Old MSI registration remains after upgrade' }
-          Run-WinGet @('uninstall','--id','MetalBear.mirrord','--exact','--silent','--disable-interactivity')
+          Run-WinGet @('uninstall','--id','MetalBear.mirrord','--exact','--silent','--accept-source-agreements','--disable-interactivity')
           if (Test-Path (Join-Path ${env:ProgramFiles(x86)} 'mirrord\bin\mirrord.exe')) { throw 'Executable remains after uninstall' }
           'PASS: validation, unattended installation, CLI launch, ARP metadata, upgrade from 3.246.0, and uninstall' >> $env:GITHUB_STEP_SUMMARY
       - name: Preserve WinGet logs
